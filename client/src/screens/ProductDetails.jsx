@@ -48,11 +48,10 @@ const ProductDetails = ({ match }) => {
           <br />
           <Rating
             size='small'
+            readOnly
             value={product.rating}
-            readOnly={true}
             precision={0.5}
           />
-          &nbsp;
           <span>{product.numReviews} reviews</span>
           <h2>Price: ${product.price}</h2>
         </Grid>
