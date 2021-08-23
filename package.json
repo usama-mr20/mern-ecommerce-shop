@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "concurrently": "^6.2.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.13.7",
+    "nodemon": "^2.0.12"
+  },
+  "name": "shop",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Full stack ecommerce web application",
+  "main": "index.js",
+  "author": "USAMA",
+  "license": "MIT",
+  "scripts": {
+    "start": "node server/server.js",
+    "server": "nodemon server/server.js",
+    "client": "yarn --cwd ./client start",
+    "dev": "concurrently \"yarn run server\" \"yarn run client\" ",
+    "data:import": "node server/seeder",
+    "data:destroy": "node server/seeder -d"
+  }
+}
