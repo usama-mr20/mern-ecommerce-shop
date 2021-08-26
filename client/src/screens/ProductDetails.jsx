@@ -80,7 +80,6 @@ const ProductDetails = ({ history, match }) => {
                   value={qty}
                   onChange={(e) => setQty(e.target.value)}
                 >
-                  <option aria-label='None' value='' />
                   {[...Array(product.countInStock).keys()].map((x) => (
                     <option key={x + 1} value={x + 1}>
                       {x + 1}
