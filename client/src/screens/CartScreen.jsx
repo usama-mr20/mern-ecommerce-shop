@@ -20,6 +20,7 @@ import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
+import { removeCartItem } from "../actions/cartActions";
 
 const CartScreen = ({ history, location, match }) => {
   const productId = match.params.id;
@@ -34,12 +35,15 @@ const CartScreen = ({ history, location, match }) => {
       dispatch(addToCart(productId, qty));
     }
   }, [dispatch, productId, qty]);
+
   const removeItemHandler = (id) => {
-    console.log(id + "removed");
+    dispatch(removeCartItem(id));
   };
+
   const checkOutHandler = () => {
     history.push("/login?redirect=shipping");
   };
+
   return (
     <Grid container spacing={3}>
       <Grid item md={8}>
