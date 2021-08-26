@@ -16,6 +16,10 @@ import NativeSelect from "@material-ui/core/NativeSelect";
 import Typography from "@material-ui/core/Typography";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import Button from "@material-ui/core/Button";
 
 const CartScreen = ({ history, location, match }) => {
   const productId = match.params.id;
@@ -33,10 +37,13 @@ const CartScreen = ({ history, location, match }) => {
   const removeItemHandler = (id) => {
     console.log(id + "removed");
   };
+  const checkOutHandler = () => {
+    history.push("/login?redirect=shipping");
+  };
   return (
     <Grid container spacing={3}>
       <Grid item md={8}>
-        <Typography variant='h4' color='initial'>
+        <Typography variant='h4' color='initial' style={{ padding: "10px" }}>
           Shopping Cart
         </Typography>
         {cartItems.length === 0 ? (
@@ -104,10 +111,33 @@ const CartScreen = ({ history, location, match }) => {
           </List>
         )}
       </Grid>
-      {/* // */}
-      <Grid item md={2}></Grid>
-      {/* // */}
-      <Grid item md={2}></Grid>
+      <Grid item md={4} style={{ padding: "40px" }}>
+        <Card style={{ maxWidth: "80%" }}>
+          <CardContent>
+            <Typography variant='h5' color='initial'>
+              Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)})
+              items
+            </Typography>
+            <Typography variant='subtitle1' color='initial'>
+              $
+              {cartItems
+                .reduce((acc, item) => acc + item.qty * item.price, 0)
+                .toFixed(2)}
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Button
+              variant='contained'
+              fullWidth
+              color='primary'
+              disabled={cartItems.length === 0}
+              onClick={checkOutHandler}
+            >
+              Proceed to checkout
+            </Button>
+          </CardActions>
+        </Card>
+      </Grid>
     </Grid>
   );
 };
