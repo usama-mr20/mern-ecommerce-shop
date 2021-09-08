@@ -1,34 +1,12 @@
 import express from "express";
-import Product from "../models/productModel.js";
-
+import {
+  getProducts,
+  getProductById,
+} from "../controllers/productController.js";
 const router = express.Router();
 
-// @desc fetch all products
-// @route /api/products
-// @access Public
-
-router.get("/", (req, res) => {
-  Product.find()
-    .then((p) => {
-      res.json(p);
-    })
-    .catch((err) => {
-      res.status(500).send(err);
-    });
-});
-
-// @desc fetch product by id
-// @route /api/products/:id
-// @access Public
-
-router.get("/:id", (req, res) => {
-  Product.findById(req.params.id)
-    .then((p) => {
-      res.json(p);
-    })
-    .catch((err) => {
-      res.status(404).send({ message: "Product Not Found" });
-    });
-});
+// products route URL prefix => ('/api/products')
+router.get("/", getProducts);
+router.get("/:id", getProductById);
 
 export default router;

@@ -5,6 +5,7 @@ import Product from "../components/Product";
 import Loader from "../components/Loader";
 import AlertMessage from "../components/AlertMessage";
 import { listProducts } from "../actions/productActions";
+import Typography from "@material-ui/core/Typography";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -16,7 +17,13 @@ const HomeScreen = () => {
 
   return (
     <>
-      <h1>Latest Products</h1>
+      <Typography
+        variant='h4'
+        color='initial'
+        style={{ paddingTop: "5px", paddingBottom: "25px" }}
+      >
+        Latest Products
+      </Typography>
       {loading ? (
         <Loader />
       ) : error ? (
