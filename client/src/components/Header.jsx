@@ -41,7 +41,7 @@ const Header = () => {
   const { userInfo } = useSelector((state) => state.userLogin);
   const dispatch = useDispatch();
 
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState();
   const open = Boolean(anchorEl);
 
   const handleMenu = (event) => {

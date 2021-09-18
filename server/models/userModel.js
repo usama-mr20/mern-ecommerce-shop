@@ -29,5 +29,13 @@ userSchema.methods.validatePassword = async function (usrPswd) {
   return await bcrypt.compare(usrPswd, this.password);
 };
 
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) {
+    next();
+  }
+
+  const salt = bcrypt.genSaltSync(10);
+  this.password = bcrypt.hashSync(this.password, salt);
+});
 const User = mongoose.model("User", userSchema);
 export default User;
