@@ -55,6 +55,11 @@ const Header = () => {
   const handleLogout = () => {
     dispatch(logout());
   };
+
+  const handleMyAcc = () => {
+    console.log("account clicked");
+  };
+
   return (
     <div className={classes.root}>
       <AppBar postion='static' color='primary'>
@@ -63,13 +68,13 @@ const Header = () => {
             <StorefrontIcon style={{ fontSize: 40 }} />
           </Link>
           <Link to='/' className={classes.link}>
-            <Typography variant='h6'>My Shop</Typography>
-          </Link>
-          <Link to='/cart' className={classes.linkBtn}>
-            <Button color='inherit'>Cart</Button>
+            <Typography variant='h6'>Sam's Store</Typography>
           </Link>
           {userInfo ? (
             <>
+              <Link to='/cart' className={classes.linkBtn}>
+                <Button color='inherit'>Cart</Button>
+              </Link>
               <div>
                 <IconButton
                   aria-label='account of current user'
@@ -95,15 +100,22 @@ const Header = () => {
                   open={open}
                   onClose={handleClose}
                 >
-                  <MenuItem onClick={handleClose}>My account</MenuItem>
+                  <Link to='/profile' className={classes.linkBtn}>
+                    <MenuItem>My account</MenuItem>
+                  </Link>
                   <MenuItem onClick={handleLogout}>Logout</MenuItem>
                 </Menu>
               </div>
             </>
           ) : (
-            <Link to='/login' className={classes.linkBtn}>
-              <Button color='inherit'>Login</Button>
-            </Link>
+            <>
+              <Link to='/login' className={classes.linkBtn}>
+                <Button color='inherit'>Login</Button>
+              </Link>
+              <Link to='/register' className={classes.linkBtn}>
+                <Button color='inherit'>Sign up</Button>
+              </Link>
+            </>
           )}
         </Toolbar>
       </AppBar>

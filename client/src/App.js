@@ -8,6 +8,7 @@ import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ProductDetails from "./screens/ProductDetails";
+import UserProfileScreen from "./screens/UserProfileScreen";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path='/cart/:id?' component={CartScreen} />
             <Route path='/login' component={LoginScreen} />
             <Route path='/register' component={RegisterScreen} />
+            <Route path='/profile' component={UserProfileScreen} />
           </Switch>
         </main>
       </Container>
