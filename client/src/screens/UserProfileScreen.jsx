@@ -7,6 +7,8 @@ function UserProfileScreen() {
     <div>
       <strong>Email:</strong> &nbsp;
       {userInfo.email}
+      <br />
+      {userInfo.name}
     </div>
   );
 }

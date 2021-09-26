@@ -36,8 +36,8 @@ const useStyles = makeStyles((theme) => ({
 
 const SignUp = ({ history, location }) => {
   const classes = useStyles();
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  // const [firstName, setFirstName] = useState("");
+  // const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -55,13 +55,17 @@ const SignUp = ({ history, location }) => {
 
   const dispatch = useDispatch();
 
-  const handleFirstNameChange = (e) => {
-    setFirstName(e.target.value);
+  const handleNameChange = (e) => {
+    setName(e.target.value);
   };
 
-  const handleLastNameChange = (e) => {
-    setLastName(e.target.value);
-  };
+  // const handleFirstNameChange = (e) => {
+  //   setFirstName(e.target.value);
+  // };
+
+  // const handleLastNameChange = (e) => {
+  //   setLastName(e.target.value);
+  // };
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -71,7 +75,7 @@ const SignUp = ({ history, location }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setName(`${firstName} " " ${lastName}`);
+    // setName(`${firstName} " " ${lastName}`);
     dispatch(register(name, email, password));
   };
 
@@ -90,20 +94,20 @@ const SignUp = ({ history, location }) => {
 
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
-                autoComplete='fname'
-                name='firstName'
+                autoComplete='name'
+                name='Name'
                 variant='outlined'
                 required
                 fullWidth
-                id='firstName'
-                label='First Name'
+                id='Name'
+                label='Your Name'
                 autoFocus
-                onChange={handleFirstNameChange}
+                onChange={handleNameChange}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            {/* <Grid item xs={12} sm={6}>
               <TextField
                 variant='outlined'
                 required
@@ -112,9 +116,8 @@ const SignUp = ({ history, location }) => {
                 label='Last Name'
                 name='lastName'
                 autoComplete='lname'
-                onChange={handleLastNameChange}
               />
-            </Grid>
+            </Grid> */}
             <Grid item xs={12}>
               <TextField
                 variant='outlined'

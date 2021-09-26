@@ -105,19 +105,51 @@ const registerUser = (req, res) => {
     .catch((err) => {
       return res.status(400).json({ message: err.message });
     });
-
-  // exec((err, user) => {
-  //   if (err) {
-  //     res.status(400);
-  //     return "Some error occurred while querying user.";
-  //   }
-  //   if (user) {
-  //     return res.status(400).json({
-  //       message:
-  //         "A user with the provided email already exists. Please try another.",
-  //     });
-  //   }
-  // });
 };
 
-export { authUser, getUserProfile, registerUser };
+// @desc    Update user profile
+// @route   PUT /api/users/profile
+// @access  Private
+
+const updateUserProfile = (req, res) => {
+  User.findById(req.user._id).exec((err, user) => {
+    if (err) {
+      res.status(401).send({ message: err });
+      return;
+    }
+
+    if (user) {
+      user.name = req.body.name || user.name;
+      user.email = req.body.email || user.email;
+      if (req.body.password) {
+        user.password = req.body.password;
+      }
+
+      user.save().then((updatedUser) => {
+        var jwtToken = jwt.sign(
+          { id: updatedUser._id },
+          process.env.JWT_SECRET,
+          {
+            expiresIn: 86400, // 24 hours
+          }
+        );
+        res.status(200).send({
+          _id: updatedUser._id,
+          name: updatedUser.name,
+          email: updatedUser.email,
+          isAdmin: updatedUser.isAdmin,
+          token: jwtToken,
+        });
+        if (err) {
+          return res
+            .status(404)
+            .json({ message: "Error updating user details." });
+        }
+      });
+    } else {
+      return res.status(404).json({ message: "User Not found." });
+    }
+  });
+};
+
+export { authUser, getUserProfile, registerUser, updateUserProfile };
