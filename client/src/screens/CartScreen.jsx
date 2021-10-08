@@ -162,7 +162,7 @@ const CartScreen = ({ history, location, match }) => {
           </Grid>
         </Grid>
       ) : (
-        history.push("/login")
+        history.push("/login?redirect=cart")
       )}
     </>
   );

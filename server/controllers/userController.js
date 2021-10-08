@@ -31,7 +31,7 @@ const authUser = (req, res) => {
     }
 
     var jwtToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: 86400, // 24 hours
+      expiresIn: "30d",
     });
 
     res.status(200).send({
@@ -40,6 +40,7 @@ const authUser = (req, res) => {
       email: user.email,
       isAdmin: user.isAdmin,
       token: jwtToken,
+      ps: user.password,
     });
   });
 };
@@ -89,7 +90,7 @@ const registerUser = (req, res) => {
           password,
         }).then((user) => {
           var jwtToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-            expiresIn: 86400, // 24 hours
+            expiresIn: "30d", // 24 hours
           });
 
           res.status(201).json({
@@ -111,45 +112,72 @@ const registerUser = (req, res) => {
 // @route   PUT /api/users/profile
 // @access  Private
 
-const updateUserProfile = (req, res) => {
-  User.findById(req.user._id).exec((err, user) => {
-    if (err) {
-      res.status(401).send({ message: err });
-      return;
+// const updateUserProfile = (req, res) => {
+//   User.findById(req.user._id).exec((err, user) => {
+//     if (err) {
+//       res.status(401).send({ message: err });
+//       return;
+//     }
+
+//     if (user) {
+//       user.name = req.body.name || user.name;
+//       user.email = req.body.email || user.email;
+//       // if (req.body.password && req.body.password !== "") {
+//       //   user.password = req.body.password;
+//       // }
+
+//       user.save().then((updatedUser) => {
+//         var jwtToken = jwt.sign(
+//           { id: updatedUser._id },
+//           process.env.JWT_SECRET,
+//           {
+//             expiresIn: 86400, // 24 hours
+//           }
+//         );
+//         res.status(200).send({
+//           _id: updatedUser._id,
+//           name: updatedUser.name,
+//           email: updatedUser.email,
+//           isAdmin: updatedUser.isAdmin,
+//           token: jwtToken,
+//         });
+//         if (err) {
+//           return res
+//             .status(404)
+//             .json({ message: "Error updating user details." });
+//         }
+//       });
+//     } else {
+//       return res.status(404).json({ message: "User Not found." });
+//     }
+//   });
+// };
+
+const updateUserProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    if (req.body.password) {
+      user.password = req.body.password;
     }
 
-    if (user) {
-      user.name = req.body.name || user.name;
-      user.email = req.body.email || user.email;
-      if (req.body.password) {
-        user.password = req.body.password;
-      }
-
-      user.save().then((updatedUser) => {
-        var jwtToken = jwt.sign(
-          { id: updatedUser._id },
-          process.env.JWT_SECRET,
-          {
-            expiresIn: 86400, // 24 hours
-          }
-        );
-        res.status(200).send({
-          _id: updatedUser._id,
-          name: updatedUser.name,
-          email: updatedUser.email,
-          isAdmin: updatedUser.isAdmin,
-          token: jwtToken,
-        });
-        if (err) {
-          return res
-            .status(404)
-            .json({ message: "Error updating user details." });
-        }
-      });
-    } else {
-      return res.status(404).json({ message: "User Not found." });
-    }
-  });
-};
+    const updatedUser = await user.save();
+    // var jwtToken = jwt.sign({ id: updatedUser._id }, process.env.JWT_SECRET, {
+    //   expiresIn: "30d",
+    // });
+    res.json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
+      // token: jwtToken,
+    });
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
+});
 
 export { authUser, getUserProfile, registerUser, updateUserProfile };

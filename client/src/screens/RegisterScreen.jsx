@@ -39,8 +39,8 @@ const SignUp = ({ history, location }) => {
   // const [firstName, setFirstName] = useState("");
   // const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
 
   const userRegister = useSelector((state) => state.userRegister);
   const { loading, error, userInfo } = userRegister;

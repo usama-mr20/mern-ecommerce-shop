@@ -100,9 +100,9 @@ const Header = () => {
                   open={open}
                   onClose={handleClose}
                 >
-                  <Link to='/profile' className={classes.linkBtn}>
+                  <a href='/profile' className={classes.linkBtn}>
                     <MenuItem>My account</MenuItem>
-                  </Link>
+                  </a>
                   <MenuItem onClick={handleLogout}>Logout</MenuItem>
                 </Menu>
               </div>
