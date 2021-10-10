@@ -9,6 +9,7 @@ import RegisterScreen from "./screens/RegisterScreen";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ProductDetails from "./screens/ProductDetails";
 import UserProfileScreen from "./screens/UserProfileScreen";
+import ShippingScreen from "./screens/ShippingScreen";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path='/login' component={LoginScreen} />
             <Route path='/register' component={RegisterScreen} />
             <Route path='/profile' component={UserProfileScreen} />
+            <Route path='/shipping' component={ShippingScreen} />
           </Switch>
         </main>
       </Container>

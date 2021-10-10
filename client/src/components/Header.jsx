@@ -56,10 +56,6 @@ const Header = () => {
     dispatch(logout());
   };
 
-  const handleMyAcc = () => {
-    console.log("account clicked");
-  };
-
   return (
     <div className={classes.root}>
       <AppBar postion='static' color='primary'>

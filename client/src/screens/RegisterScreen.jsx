@@ -36,8 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SignUp = ({ history, location }) => {
   const classes = useStyles();
-  // const [firstName, setFirstName] = useState("");
-  // const [lastName, setLastName] = useState("");
+
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -59,13 +58,6 @@ const SignUp = ({ history, location }) => {
     setName(e.target.value);
   };
 
-  // const handleFirstNameChange = (e) => {
-  //   setFirstName(e.target.value);
-  // };
-
-  // const handleLastNameChange = (e) => {
-  //   setLastName(e.target.value);
-  // };
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -75,7 +67,6 @@ const SignUp = ({ history, location }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // setName(`${firstName} " " ${lastName}`);
     dispatch(register(name, email, password));
   };
 
@@ -107,17 +98,6 @@ const SignUp = ({ history, location }) => {
                 onChange={handleNameChange}
               />
             </Grid>
-            {/* <Grid item xs={12} sm={6}>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
-                id='lastName'
-                label='Last Name'
-                name='lastName'
-                autoComplete='lname'
-              />
-            </Grid> */}
             <Grid item xs={12}>
               <TextField
                 variant='outlined'
