@@ -10,6 +10,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ProductDetails from "./screens/ProductDetails";
 import UserProfileScreen from "./screens/UserProfileScreen";
 import ShippingScreen from "./screens/ShippingScreen";
+import PaymentScreen from "./screens/PaymentScreen";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path='/register' component={RegisterScreen} />
             <Route path='/profile' component={UserProfileScreen} />
             <Route path='/shipping' component={ShippingScreen} />
+            <Route path='/payment' component={PaymentScreen} />
           </Switch>
         </main>
       </Container>

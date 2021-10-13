@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { saveShippingAddress } from "../actions/cartActions";
+import CheckoutStepper from "../components/CheckoutStepper";
 
 const ShippingScreen = ({ history }) => {
   const cart = useSelector((state) => state.cart);
@@ -37,65 +38,71 @@ const ShippingScreen = ({ history }) => {
   const classes = useStyles();
 
   return (
-    <Container component='main' maxWidth='xs'>
-      <Typography component='h1' variant='h5'>
-        Shipping
-      </Typography>
-      <form className={classes.form} noValidate onSubmit={handleSubmit}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <TextField
-              variant='outlined'
-              required
-              fullWidth
-              id='Address'
-              label='Address'
-              onChange={(e) => setAddress(e.target.value)}
-            />
-          </Grid>
+    <>
+      <CheckoutStepper CurrentStep={1} />
+      <Container component='main' maxWidth='xs'>
+        <form className={classes.form} noValidate onSubmit={handleSubmit}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Typography align='center' component='h1' variant='h5'>
+                Shipping Details
+              </Typography>
+            </Grid>
 
-          <Grid item xs={12}>
-            <TextField
-              variant='outlined'
-              required
-              fullWidth
-              id='city'
-              label='City'
-              name='city'
-              onChange={(e) => setCity(e.target.value)}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              variant='outlined'
-              required
-              fullWidth
-              typr='number'
-              name='postal code'
-              label='Postal Code'
-              id='postalCode'
-              onChange={(e) => setPostalCode(e.target.value)}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              variant='outlined'
-              required
-              fullWidth
-              name='country'
-              label='Country'
-              id='country'
-              onChange={(e) => setCountry(e.target.value)}
-            />
-          </Grid>
-        </Grid>
-        <br />
+            <Grid item xs={12}>
+              <TextField
+                variant='outlined'
+                required
+                fullWidth
+                id='Address'
+                label='Address'
+                onChange={(e) => setAddress(e.target.value)}
+              />
+            </Grid>
 
-        <Button type='submit' fullWidth variant='contained' color='primary'>
-          Submit{" "}
-        </Button>
-      </form>
-    </Container>
+            <Grid item xs={12}>
+              <TextField
+                variant='outlined'
+                required
+                fullWidth
+                id='city'
+                label='City'
+                name='city'
+                onChange={(e) => setCity(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant='outlined'
+                required
+                fullWidth
+                typr='number'
+                name='postal code'
+                label='Postal Code'
+                id='postalCode'
+                onChange={(e) => setPostalCode(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant='outlined'
+                required
+                fullWidth
+                name='country'
+                label='Country'
+                id='country'
+                onChange={(e) => setCountry(e.target.value)}
+              />
+            </Grid>
+          </Grid>
+          <br />
+
+          <Button type='submit' fullWidth variant='contained' color='primary'>
+            Proceed
+          </Button>
+        </form>
+      </Container>
+    </>
   );
 };
 
