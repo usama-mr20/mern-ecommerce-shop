@@ -3,12 +3,6 @@ import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 const CheckoutStepper = (props) => {
-  function getSteps() {
-    return ["Sign In", "Shipping", "Payment", "Place Order"];
-  }
-
-  const steps = getSteps();
-
   return (
     <>
       <Stepper alternativeLabel activeStep={props.CurrentStep}>
