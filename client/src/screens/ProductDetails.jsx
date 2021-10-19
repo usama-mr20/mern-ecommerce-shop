@@ -101,14 +101,14 @@ const ProductDetails = ({ history, match }) => {
             <br />
             <br />
 
-            <Button
+            {/* <Button
               variant='contained'
               color='primary'
               fullWidth
               disabled={product.countInStock === 0}
             >
               BUY
-            </Button>
+            </Button> */}
           </Grid>
         </Grid>
       )}
